@@ -1,0 +1,13 @@
+// $Id$
+// vim:ft=javascript
+
+// If your extension references something external, use ARG_WITH
+// ARG_WITH("portmidi", "for portmidi support", "no");
+
+// Otherwise, use ARG_ENABLE
+// ARG_ENABLE("portmidi", "enable portmidi support", "no");
+
+if (PHP_PORTMIDI != "no") {
+	EXTENSION("portmidi", "portmidi.c");
+}
+

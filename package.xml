@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+ <name>portmidi</name>
+ <channel>pecl.php.net</channel>
+ <summary>a portmidi wrapper for PHP</summary>
+ <description>portmidi is a portable real-time MIDI library. portmidi-php is a
+wrapper extension that provides portmidi functionality in PHP land.
+
+See https://github.com/adsr/portmidi-php for the source distribution.
+See http://sourceforge.net/projects/portmedia for the underlying library.</description>
+ <lead>
+  <name>Adam Saponara</name>
+  <user>as</user>
+  <email>as@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2014-10-19</date>
+ <time>20:18:00</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache</license>
+ <notes>initial release</notes>
+ <contents>
+  <dir name="/">
+   <dir name="build">
+    <file role="src" name="libtool.m4"/>
+    <file role="src" name="ltoptions.m4"/>
+    <file role="src" name="ltsugar.m4"/>
+    <file role="src" name="ltversion.m4"/>
+    <file role="src" name="lt~obsolete.m4"/>
+   </dir>
+   <dir name="examples">
+    <file role="doc" name="portmidi.php"/>
+   </dir>
+   <dir name="tests">
+    <file role="test" name="001.phpt"/>
+   </dir>
+   <file role="doc" name="LICENSE"/>
+   <file role="src" name="acinclude.m4"/>
+   <file role="src" name="aclocal.m4"/>
+   <file role="src" name="config.h"/>
+   <file role="src" name="config.m4"/>
+   <file role="src" name="config.w32"/>
+   <file role="src" name="constants.h"/>
+   <file role="src" name="php_portmidi.h"/>
+   <file role="src" name="portmidi.c"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.8</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <providesextension>portmidi</providesextension>
+ <extsrcrelease/>
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2014-10-19</date>
+   <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache</license>
+   <notes>initial release</notes>
+  </release>
+ </changelog>
+</package>
