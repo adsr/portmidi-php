@@ -6,7 +6,7 @@ extension that provides portmidi functionality in PHP land.
 
 To install:
 
-    $ # Follow installation instructions for portmidi
+    $ sudo apt-get install libportmidi-dev # or equivalent
     $
     $ # Clone repo
     $ git clone https://github.com/adsr/portmidi-php.git
