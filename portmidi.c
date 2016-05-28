@@ -30,6 +30,22 @@
 
 #include <portmidi.h>
 
+#if PHP_MAJOR_VERSION >= 7
+    #define ZEND_FETCH_RESOURCE(rsrc, rsrc_type, passed_id, default_id, resource_type_name, resource_type) \
+        (rsrc = (rsrc_type) zend_fetch_resource(Z_RES_P(*passed_id), resource_type_name, resource_type))
+    #define ZEND_REGISTER_RESOURCE(return_value, result, le_result) \
+        ZVAL_RES(return_value, zend_register_resource(result, le_result))
+    #define COMPAT_RETURN_STRING(str, dup) \
+        RETURN_STRING(str)
+    #define COMPAT_ADD_ASSOC_STRING(ret, key, str, dup) \
+        add_assoc_string(ret, key, str)
+#else
+    #define COMPAT_RETURN_STRING(str, dup) \
+        RETURN_STRING(str, dup)
+    #define COMPAT_ADD_ASSOC_STRING(ret, key, str, dup) \
+        add_assoc_string(ret, key, str, dup)
+#endif
+
 ZEND_DECLARE_MODULE_GLOBALS(portmidi)
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_portmidi_none, 0, 0, 0)
@@ -235,7 +251,7 @@ PHP_FUNCTION(portmidi_get_error_text)
     }
 
     if ((errmsg = Pm_GetErrorText(err)) != NULL) {
-        RETURN_STRING(errmsg, 0);
+        COMPAT_RETURN_STRING(errmsg, 0);
     }
     RETURN_FALSE;
 }
@@ -256,7 +272,7 @@ PHP_FUNCTION(portmidi_get_host_error_text)
         efree(errstr);
         RETURN_FALSE;
     }
-    RETURN_STRING(errstr, 0);
+    COMPAT_RETURN_STRING(errstr, 0);
 }
 
 /* {{{ proto int portmidi_count_devices(void)
@@ -289,8 +305,8 @@ PHP_FUNCTION(portmidi_get_device_info)
         RETURN_FALSE;
     }
     array_init(return_value);
-    add_assoc_string(return_value, "interface", (char*)info->interf, 1);
-    add_assoc_string(return_value, "name", (char*)info->name, 1);
+    COMPAT_ADD_ASSOC_STRING(return_value, "interface", (char*)info->interf, 1);
+    COMPAT_ADD_ASSOC_STRING(return_value, "name", (char*)info->name, 1);
     add_assoc_bool(return_value, "input", info->input);
     add_assoc_bool(return_value, "output", info->output);
     add_assoc_bool(return_value, "opened", info->opened);
