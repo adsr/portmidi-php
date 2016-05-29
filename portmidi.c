@@ -39,11 +39,13 @@
         RETURN_STRING(str)
     #define COMPAT_ADD_ASSOC_STRING(ret, key, str, dup) \
         add_assoc_string(ret, key, str)
+    #define COMPAT_STRLEN_DELTA 1
 #else
     #define COMPAT_RETURN_STRING(str, dup) \
         RETURN_STRING(str, dup)
     #define COMPAT_ADD_ASSOC_STRING(ret, key, str, dup) \
         add_assoc_string(ret, key, str, dup)
+    #define COMPAT_STRLEN_DELTA 0
 #endif
 
 ZEND_DECLARE_MODULE_GLOBALS(portmidi)
@@ -158,7 +160,7 @@ PHP_MINIT_FUNCTION(portmidi)
 
     /** Register constants */
     #define PHP_PORTMIDI_CONSTANT(NAME, VAL) \
-        zend_register_long_constant(#NAME, sizeof(#NAME), VAL, CONST_CS | CONST_PERSISTENT, module_number TSRMLS_CC);
+        zend_register_long_constant(#NAME, sizeof(#NAME)-COMPAT_STRLEN_DELTA, VAL, CONST_CS | CONST_PERSISTENT, module_number TSRMLS_CC);
     #include "constants.h"
     #undef PHP_PORTMIDI_CONSTANT
 
@@ -453,10 +455,10 @@ PHP_FUNCTION(portmidi_read)
         RETURN_NULL();
     }
     array_init(return_value);
-    add_assoc_long_ex(return_value, "status", sizeof("status"), (long)Pm_MessageStatus(event.message));
-    add_assoc_long_ex(return_value, "data1", sizeof("data1"), (long)Pm_MessageData1(event.message));
-    add_assoc_long_ex(return_value, "data2", sizeof("data2"), (long)Pm_MessageData2(event.message));
-    add_assoc_long_ex(return_value, "raw", sizeof("raw"), (long)event.message);
+    add_assoc_long_ex(return_value, "status", sizeof("status")-COMPAT_STRLEN_DELTA, (long)Pm_MessageStatus(event.message));
+    add_assoc_long_ex(return_value, "data1", sizeof("data1")-COMPAT_STRLEN_DELTA, (long)Pm_MessageData1(event.message));
+    add_assoc_long_ex(return_value, "data2", sizeof("data2")-COMPAT_STRLEN_DELTA, (long)Pm_MessageData2(event.message));
+    add_assoc_long_ex(return_value, "raw", sizeof("raw")-COMPAT_STRLEN_DELTA, (long)event.message);
 }
 
 /* {{{ proto bool portmidi_close(resource stream)
